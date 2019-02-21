@@ -42,15 +42,6 @@ cd "./$BAZEL_PACKAGE_NAME/$BAZEL_TARGET_NAME"
 chmod a+w .
 sed -i '' "s/0.0.0-development/$VERSION/g" package.json
 
-# Log in to `npm`
-/usr/bin/expect <<EOD
-spawn npm adduser --registry=$NPM_REPOSITORY_URL
-expect {
-  "Username:" {send "$NPM_USERNAME\r"; exp_continue}
-  "Password:" {send "$NPM_PASSWORD\r"; exp_continue}
-  "Email: (this IS public)" {send "$NPM_EMAIL\r"; exp_continue}
-}
-EOD
-
-# Use *without* packing instead because
-npm publish
+npm pack
+pwd
+exit 1
